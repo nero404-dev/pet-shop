@@ -1,0 +1,254 @@
+header {
+    padding: 15px 0;
+    background-color: var(--green-3);
+    /* border-bottom: 1px solid var(--orange-1); */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+}
+
+header .header {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+header .header .col-1 {
+    margin: auto 0;
+}
+
+header .header .col-1 a {
+    text-decoration: none;
+}
+
+header .header .col-1 a button {
+    padding: 8px 30px;
+    border: 1px solid var(--orange-1);
+    border-radius: 0.5rem;
+    background-color: transparent;
+    color: var(--green-5);
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+header .header .col-1 a button:hover {
+    background-color: var(--green-4);
+    border: 1px solid var(--orange-2);
+}
+
+header .header .col-1 a button .fa {
+    padding-right: 5px;
+    font-weight: 600;
+}
+
+header .header .col-2 {
+    width: 20%;
+    margin: auto 0;
+}
+
+header .header .col-2 a {
+    text-decoration: none;
+}
+
+header .header .col-2 a img {
+    width: 100%;
+    height: 100%;
+    filter: brightness(1);
+    transition: 0.3s;
+}
+
+header .header .col-2 a img:hover {
+    filter: brightness(0.8);
+}
+
+/* <---> */
+
+.categories .cats {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 20px 0;
+}
+
+.categories .cats a {
+    text-decoration: none;
+}
+
+.categories .cats .cat {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+
+    /* Fixed width for 4 columns with gap */
+    /* flex: 0 0 calc(25% - 20px); */
+    /* Fixed width for 3 columns with gap */
+    flex: 0 0 calc(33.3333% - 13.33px);
+    margin-bottom: 20px; /* Space below each item */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    background-color: var(--orange-3); /* Background color for cards */
+    border: 1px solid var(--grey-1); /* Light border */
+    border-radius: 0.5rem; /* Rounded corners */
+    /* padding: 10px; */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6); /* Subtle shadow for depth */
+    position: relative; /* Position relative for overlay */
+    /* text-align: center; */
+    transition: 0.3s;
+}
+
+.categories .cats .cat .image {
+    width: 100%;
+}
+
+.categories .cats .cat .image img {
+    width: 100%;
+    border-radius: 0.5rem;
+    display: block;
+    height: 100%;
+    filter: brightness(0.6);
+}
+
+.categories .cats .cat .overlay_from_up {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--bg-tr);
+    border-radius: 5px;
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    transition: .5s ease;
+}
+
+.categories .cats .cat:hover .overlay_from_up {
+    bottom: 0;
+    height: 100%;
+}
+
+/* .categories .cats .cat .overlay_from_down {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--orange-4);
+    border-radius: 5px;
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    transition: .5s ease;
+}
+
+.categories .cats .cat:hover .overlay_from_down {
+    height: 100%;
+} */
+
+.categories .cats .cat .overlay_from_left {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--orange-4);
+    border-radius: 5px;
+    overflow: hidden;
+    width: 0;
+    height: 100%;
+    transition: .5s ease;
+}
+
+.categories .cats .cat:hover .overlay_from_left {
+    width: 100%;
+}
+
+.categories .cats .cat .overlay_from_right {
+    position: absolute;
+    bottom: 0;
+    left: 100%;
+    right: 0;
+    background-color: var(--green-4);
+    border-radius: 5px;
+    overflow: hidden;
+    width: 0;
+    height: 100%;
+    transition: .5s ease;
+}
+
+.categories .cats .cat:hover .overlay_from_right {
+    width: 100%;
+    left: 0;
+}
+
+.categories .cats .cat .text {
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.categories .cats .cat .overlay_from_up .text {
+    color: var(--bg);
+}
+
+.categories .cats .cat .overlay_from_left .text {
+    color: var(--orange-3);
+}
+
+.categories .cats .cat .overlay_from_down .text, .overlay_from_right .text {
+    color: var(--green-3);
+}
+
+.categories .cats .cat h3 {
+    display: none;
+    color: var(--green-5);
+    text-align: center;
+}
+
+/* <---> */
+
+@media screen and (max-width: 414px) {
+    header .header {
+        width: 90%;
+    }
+    header .header .col-1 a button {
+        padding: 6px 20px;
+        font-size: 12px;
+    }
+    header .header .col-2 {
+        width: 50%;
+    }
+
+    .categories .cats {
+        width: 100%;
+        height: fit-content;
+        display: block;
+        column-count: 1;
+        column-gap: unset;
+    }
+    .categories .cats .cat {
+        width: 100%;
+        border: 1px solid var(--grey-3);
+        border-radius: 5px;
+        padding: 0;
+        margin: 30px 0;
+    }
+    .categories .cats .cat .image img {
+        width: 100%;
+        border-radius: unset;
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+    }
+    .categories .cats .cat .overlay_from_up, .categories .cats .cat .overlay_from_left, .categories .cats .cat .overlay_from_right, .categories .cats .cat .overlay_from_down {
+        display: none;
+    }
+    .categories .cats .cat:hover .overlay_from_up, .categories .cats .cat:hover .overlay_from_left, .categories .cats .cat:hover .overlay_from_right, .categories .cats .cat:hover .overlay_from_down {
+        display: none;
+    }
+    .categories .cats .cat .overlay_from_down .text, .categories .cats .cat .overlay_from_up .text, .categories .cats .cat .overlay_from_left .text, .categories .cats .cat .overlay_from_right .text {
+        display: none;
+    }
+    .categories .cats .cat h3 {
+        display: block;
+    }
+}

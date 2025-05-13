@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | Four Paws</title>
+    <link rel="stylesheet" href="products.css">
+    <link rel="stylesheet" href="variables.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="pictures/four-paws-logo.jpg">
+</head>
+<body>
+    <header>
+        <div class="header">
+            <div class="col-1">
+                <a href="categories.html"><button><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button></a>
+            </div>
+            <div class="col-2">
+                <a href="index.html"><img src="pictures/full-logo-tr-cropped.png" alt="Four Paws Logo"></a>
+            </div>
+        </div>
+    </header>
+    
+    <section class="products">
+        <div class="section-title">
+            <img src="pictures/four-paws-symbol-tr.png" alt="Four Paws Symbol">
+            <h2>Products</h2>
+        </div>
+        <p id="searchResult"></p>
+
+        <div id="product-list"></div>
+    </section>
+    
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get('category');
+        const searchQuery = urlParams.get('search');
+    
+        // Product database
+        const products = {
+            food: [
+                { name: "Food 0", price: "$ 10.00", description: "This Product is good for pets. This Product is good for pets. This Product is good for pets. This Product is good for pets. " ,img: "pictures/food/food-product-0.png", category: "food" },
+                { name: "Food 1", price: "$ 12.00", description: "This Product is good for pets. This Product is good for pets. This Product is good for pets. This Product is good for pets. " ,img: "pictures/food/food-product-0.png", category: "food" },
+            ],
+            toys: [
+                { name: "Toy 0", price: "$ 6.00", description: "This Product is good for pets. This Product is good for pets. This Product is good for pets. This Product is good for pets. " ,img: "pictures/toys/toys-product-1.png", category: "toys" },
+                { name: "Toy 1", price: "$ 8.00", description: "This Product is good for pets. This Product is good for pets. This Product is good for pets. This Product is good for pets. " ,img: "pictures/toys/toys-product-1.png", category: "toys" },
+                { name: "Toy 2", price: "$ 14.00", description: "This Product is good for pets. This Product is good for pets. This Product is good for pets. This Product is good for pets. " ,img: "pictures/toys/toys-product-1.png", category: "toys" },
+            ],
+            accessories: [
+                { name: "Accessory 0", price: "$ 15.00", description: "This Product is good for pets. This Product is good for pets. This Product is good for pets. This Product is good for pets. " ,img: "pictures/accessories/accessories-product-0.png", category: "accessories" },
+            ],
+            supplies: [
+                { name: "Supply 0", price: "$ 20.00", description: "This Product is good for pets. This Product is good for pets. This Product is good for pets. This Product is good for pets. " ,img: "pictures/supplies/supplies-product-0.png", category: "supplies" },
+            ],
+            care: [
+                { name: "Care Essential 0", price: "$ 25.00", description: "This Product is good for pets. This Product is good for pets. This Product is good for pets. This Product is good for pets. " ,img: "pictures/food/food-product-0.png", category: "care" },
+            ]
+        };
+    
+        const productList = document.getElementById('product-list');
+        const searchResult = document.getElementById('searchResult');
+    
+        function displayProducts(productsToShow) {
+            productList.innerHTML = productsToShow.map(product => `
+                <div class="product">
+                    <img src="${product.img}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>${product.description}</p>
+                    <h4 class="price">${product.price}</h4>
+                </div>
+            `).join('');
+        }
+    
+        // Handle search or category display
+        if (searchQuery) {
+            // Search functionality
+            const lowerCaseQuery = searchQuery.toLowerCase();
+            let matchedProducts = [];
+            
+            // Search through all categories
+            Object.values(products).forEach(categoryProducts => {
+                matchedProducts = matchedProducts.concat(
+                    categoryProducts.filter(product => 
+                        product.name.toLowerCase().includes(lowerCaseQuery) ||
+                        product.category.toLowerCase().includes(lowerCaseQuery)
+                    )
+                );
+            });
+    
+            // Display search results
+            if (matchedProducts.length > 0) {
+                searchResult.innerHTML = `
+                    <div class="search-result">
+                        Showing results for: "${searchQuery}" 
+                        <a href="products.html"><button class="view_all-btn">View All products</button></a>
+                    </div>`;
+                displayProducts(matchedProducts);
+            } else {
+                searchResult.innerHTML = `
+                    <div class="search-result">
+                        No products found for: "${searchQuery}" 
+                        <a href="categories.html"><button class="view_all-btn">View Categories</button></a>
+                    </div>`;
+                productList.innerHTML = "<p>No matching products found.</p>";
+            }
+        } else if (category && products[category]) {
+            // Category display
+            searchResult.textContent = `Showing all ${category} products`;
+            displayProducts(products[category]);
+        } else {
+            // Default display
+            searchResult.textContent = "Explore all products!";
+            let allProducts = [];
+            Object.values(products).forEach(categoryProducts => {
+                allProducts = allProducts.concat(categoryProducts);
+            });
+            displayProducts(allProducts);
+        }
+    </script>    
+</body>
+</html>
